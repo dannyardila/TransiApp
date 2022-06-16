@@ -1,0 +1,120 @@
+#: import RiseInTransition kivy.uix.screenmanager.RiseInTransition
+#: import SlideTransition kivy.uix.screenmananager.SlideTransition
+
+
+
+<ElementCard@MDcard>:
+    radius: '10dp'
+    spacing: '10dp'
+    padding: '10dp'
+    image:''
+    text: ''
+    sub_text: ''
+    orientation: 'vertical'
+    ripple_behavior: True
+    on_release:
+        app.root.transition = RiseInTransition()
+    Image:
+        source: root.image
+        halign: 'center'
+    MDboxLayaout:
+        orientation: 'vertical'
+        MDLabel:
+            text: root.text
+            halign:'center'
+        MDLabel:
+            text: root.sub_text
+            halign: 'center'
+
+<CustomizeScreen@MDboxLayaout>:
+    orientation: 'vertical'
+    text: ''
+    padding: 100
+    MDLabel:
+        text: root.text
+        halign: 'center'
+        pos_hint: {'center_x': .5}
+    MDFillRoundFlatButton:
+        text: 'Regrsear'
+        pos_hint:{'center_x': 0.5}
+        on_release:
+            app.root.current = 'screen_principal'
+            app.root.transition = SlideTransition(direction= 'left')
+
+<Ui>:
+    MDScreen:
+        name: 'screen_principal'
+        md_bg_color: 0,.5,.5,1
+        MDboxLayaout:
+            orientation: 'vertical'
+            MDBoxlayout:
+                size_hint:1, .2
+                orientation: 'horinzotal'
+                padding: '10dp'
+            MDcard:
+                radius:'10dp'
+                padding:'20dp'
+                line_color: 1,0,1,1
+           
+                MDLabel:
+                     text: 'TransiApp'
+                     halign: 'center'
+                     pos_hint: {'center_y': 0.5}
+                MDSwitch:
+                    pos_hint: {'center_y':0.5}
+                    on_active:
+                       app.change_style(*args)
+    MDGrildLayaout:
+        cols: 2
+        size_hint:1, .8
+        padding: ['10dp', '10dp', '10dp', '10dp']
+        spacing: '10dp'
+
+        ElementCard:
+            text: 'RA'
+            sub_text: 'Rutas Alternativas'
+            image: ''
+            on_release:
+                root.current = 'screen1'
+
+        ElementCard:
+            text: 'MT'
+            sub_text: 'Mapa de Trafico'
+            image: ''
+            on_release:
+                root.current = 'screen2'
+
+        ElementCard:
+            text: 'EV'
+            sub_text: 'Estado de las vias'
+            image: ''
+            on_release:
+                root.current = 'screen3'
+
+        ElementCard:
+            text: 'DV'
+            sub_text: 'Datos de las vias'
+            image: ''
+            on_release:
+                root.current = 'screen4'
+
+    MDScreen:
+     name: 'screen1'
+     CustomizeScreen:
+        text: 'Pantalla Uno'
+
+
+    MDScreen:
+    name: 'screen1'
+    CustomizeScreen:
+        text: 'Pantalla Dos'
+
+    MDScreen:
+    name: 'screen1'
+    CustomizeScreen:
+        text: 'Pantalla Tres'
+
+    MDScreen:
+    name: 'screen1'
+    CustomizeScreen:
+        text: 'Pantalla Cuatro'
